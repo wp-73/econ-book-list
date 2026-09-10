@@ -1,0 +1,33 @@
+name: Bootstrap Gradle wrapper
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/bootstrap-wrapper.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  wrapper:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.4.1'
+      - name: Generate wrapper
+        run: gradle wrapper --gradle-version 9.4.1
+      - name: Commit wrapper and remove bootstrap workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm .github/workflows/bootstrap-wrapper.yml
+          git add -A gradlew gradlew.bat gradle/wrapper .github/workflows/bootstrap-wrapper.yml
+          git commit -m "Add Gradle wrapper"
+          git push
