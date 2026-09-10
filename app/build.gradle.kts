@@ -39,7 +39,7 @@ android {
         compose = true
     }
 
-    sourceSets.getByName("main").assets.srcDir(catalogueAssetsDir)
+    sourceSets.getByName("main").assets.srcDir(catalogueAssetsDir.get().asFile)
 }
 
 tasks.named("preBuild").configure {
