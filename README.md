@@ -10,7 +10,26 @@ The catalogue currently contains:
 - 595 works with first-publication dates
 - 206 citation-only additions
 
-## Browse the catalogue
+## Android app
+
+The repository now also contains a native Android app in the [`app`](app) module. Open the repository root in Android Studio and run the `app` configuration.
+
+The first Android release includes:
+
+- the complete offline 847-book catalogue
+- persistent per-book tick / untick state
+- All, Ticked, and Unticked filters with a progress count
+- title, author, and subject search
+- subject filtering and ranking/title/newest/citation sorting
+- book-detail pages with links to the recorded recommendation sources
+- browsable source lists and the catalogue methodology
+- System, Light, and Dark appearance modes, persisted between launches
+
+The Android build packages [`data/economics-reading-catalogue.json`](data/economics-reading-catalogue.json) directly, so the existing structured catalogue remains the single source of truth. Tick state and the appearance preference are user data stored separately with Android DataStore.
+
+GitHub Actions verifies the Android project with `gradle :app:assembleDebug` on changes affecting the app or catalogue.
+
+## Browse the catalogue on the web
 
 Open [`index.html`](index.html) to search and combine filters for subject area, publication period, authorship, recommending-source type, repeated recommendations, and citation evidence. The page is self-contained and works without a server.
 
